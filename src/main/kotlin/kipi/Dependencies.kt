@@ -7,6 +7,7 @@ import kipi.repositories.CustomerRepository
 import kipi.services.CustomerService
 
 class Dependencies {
+    val config = Config()
     private val customerRepository = CustomerRepository()
     private val customerService = CustomerService(customerRepository)
     val customerCreateController = CustomerCreateController(customerService)
