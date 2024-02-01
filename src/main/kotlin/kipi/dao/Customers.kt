@@ -7,6 +7,7 @@ object Customers : Table("customers") {
     val userId = long("userId")
     val name = varchar("name", 255)
     val surname = varchar("surname", 255)
+    val email = varchar("email", 255)
     val dateOfCreate = datetime("dateOfCreate")
     override val primaryKey = PrimaryKey(userId)
 }

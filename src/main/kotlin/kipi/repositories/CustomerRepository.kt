@@ -2,6 +2,7 @@ package kipi.repositories
 
 import kipi.dao.Customers
 import kipi.dao.Customers.dateOfCreate
+import kipi.dao.Customers.email
 import kipi.dao.Customers.name
 import kipi.dao.Customers.surname
 import kipi.dao.Customers.userId
@@ -21,6 +22,7 @@ class CustomerRepository {
             it[Customers.userId] = userId
             it[name] = customerDraft.name
             it[surname] = customerDraft.surname
+            it[email] = customerDraft.email
             it[dateOfCreate] = now()
         }
     }
@@ -28,6 +30,12 @@ class CustomerRepository {
     fun findCustomer(userId: Long) = transaction {
         Customers.select {
             Customers.userId eq userId
+        }.map { mapToCustomer(it) }.firstOrNull()
+    }
+
+    fun findCustomerByEmail(email: String) = transaction {
+        Customers.select {
+            Customers.email eq email
         }.map { mapToCustomer(it) }.firstOrNull()
     }
 
@@ -41,6 +49,7 @@ class CustomerRepository {
         userId = resultRow[userId],
         name = resultRow[name],
         surname = resultRow[surname],
+        email = resultRow[email],
         dateOfCreate = resultRow[dateOfCreate]
     )
 }

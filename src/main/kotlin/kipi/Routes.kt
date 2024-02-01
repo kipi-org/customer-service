@@ -28,8 +28,17 @@ fun Application.routes(deps: Dependencies) = with(deps) {
                 call.respond(HttpStatusCode.OK)
             }
         }
+
+        route("/customer/email") {
+            get {
+                call.respond(HttpStatusCode.OK, customerFindByEmailController.handle(call.email))
+            }
+        }
     }
 }
 
 private val ApplicationCall.userId: Long
     get() = this.parameters.getOrFail("userId").toLong()
+
+private val ApplicationCall.email: String
+    get() = this.parameters.getOrFail("email")

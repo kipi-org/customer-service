@@ -9,6 +9,7 @@
             <column name="userId" type="number"/>
             <column name="name" type="varchar"/>
             <column name="surname" type="varchar"/>
+            <column name="email" type="varchar"/>
             <column name="dateOfCreate" type="timestamp"/>
         </createTable>
     </changeSet>

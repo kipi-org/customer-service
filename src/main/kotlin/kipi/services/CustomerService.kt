@@ -23,6 +23,14 @@ class CustomerService(
         return customer
     }
 
+    fun findCustomerByEmail(email: String): Customer {
+        val customer = customerRepository.findCustomerByEmail(email)
+        customer ?: throw CustomerNotExistException("This customer not exist")
+
+        return customer
+    }
+
+
     fun deleteCustomer(userId: Long) {
         customerRepository.deleteCustomer(userId)
     }
