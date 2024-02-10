@@ -13,6 +13,7 @@ class DataSourceConfigurator(
         dataSource.databaseName = config.dbName
         dataSource.user = config.dbUser
         dataSource.password = config.dbPassword
+        dataSource.portNumbers = intArrayOf(config.dbPort)
 
         return dataSource
     }
