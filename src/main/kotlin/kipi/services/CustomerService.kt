@@ -18,14 +18,14 @@ class CustomerService(
 
     fun findCustomer(userId: Long): Customer {
         val customer = customerRepository.findCustomer(userId)
-        customer ?: throw CustomerNotExistException("This customer not exist")
+        customer ?: throw CustomerNotExistException("customer.user.not.exist")
 
         return customer
     }
 
     fun findCustomerByEmail(email: String): Customer {
         val customer = customerRepository.findCustomerByEmail(email)
-        customer ?: throw CustomerNotExistException("This customer not exist")
+        customer ?: throw CustomerNotExistException("customer.user.not.exist")
 
         return customer
     }
