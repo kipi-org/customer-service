@@ -2,6 +2,7 @@ package kipi.services
 
 import kipi.dto.Customer
 import kipi.dto.CustomerDraft
+import kipi.dto.CustomerUpdates
 import kipi.exceptions.CustomerAlreadyExistException
 import kipi.exceptions.CustomerNotExistException
 import kipi.repositories.CustomerRepository
@@ -14,6 +15,10 @@ class CustomerService(
         if (customerRepository.findCustomer(userId) != null) throw CustomerAlreadyExistException("This customer already created")
 
         customerRepository.createCustomer(userId, customerDraft)
+    }
+
+    fun updateCustomer(userId: Long, customerUpdates: CustomerUpdates) {
+        customerRepository.updateCustomer(userId, customerUpdates)
     }
 
     fun findCustomer(userId: Long): Customer {

@@ -8,11 +8,9 @@ import kipi.dao.Customers.surname
 import kipi.dao.Customers.userId
 import kipi.dto.Customer
 import kipi.dto.CustomerDraft
-import org.jetbrains.exposed.sql.ResultRow
+import kipi.dto.CustomerUpdates
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.LocalDateTime.now
 
@@ -24,6 +22,13 @@ class CustomerRepository {
             it[surname] = customerDraft.surname
             it[email] = customerDraft.email
             it[dateOfCreate] = now()
+        }
+    }
+
+    fun updateCustomer(userId: Long, customerUpdates: CustomerUpdates) = transaction {
+        Customers.update({ Customers.userId eq userId }) {
+            customerUpdates.name?.let { name -> it[Customers.name] = name }
+            customerUpdates.surname?.let { surname -> it[Customers.surname] = surname }
         }
     }
 

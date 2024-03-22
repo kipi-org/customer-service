@@ -6,6 +6,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import kipi.dto.CustomerDraft
+import kipi.dto.CustomerUpdates
 
 fun Application.routes(deps: Dependencies) = with(deps) {
     routing {
@@ -16,6 +17,11 @@ fun Application.routes(deps: Dependencies) = with(deps) {
         route("/customer/{userId}") {
             post<CustomerDraft> {
                 customerCreateController.handle(call.userId, it)
+                call.respond(HttpStatusCode.OK)
+            }
+
+            put<CustomerUpdates> {
+                customerUpdateController.handle(call.userId, it)
                 call.respond(HttpStatusCode.OK)
             }
 
