@@ -12,5 +12,4 @@ class Dependencies {
     val customerUpdateController = CustomerUpdateController(customerService)
     val customerDeleteController = CustomerDeleteController(customerService)
     val customerFindController = CustomerFindController(customerService)
-    val customerFindByEmailController = CustomerFindByEmailController(customerService)
 }
